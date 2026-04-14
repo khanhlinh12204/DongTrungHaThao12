@@ -8,7 +8,7 @@ import OrderSP from "./components/OrderSP";
 import { Card } from "react-bootstrap";
 import ShowOrder from "./components/showOrder";
 import { CartProvider } from "./components/funOrder";
-import Navbar from "@/app/components/Navbar";
+
 
 
 
