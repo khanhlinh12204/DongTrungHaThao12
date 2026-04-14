@@ -12,7 +12,16 @@ export default function ProductCard(props: Product) {
 
   const { name, price, originalPrice, image, slug, groupSlug, categorySlug, categoryName, isCombo } = props;
 
-  const discount = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
+  const parsePrice = (priceStr: string) => {
+    return Number(priceStr.replace(/[^0-9]/g, ""));
+  };
+
+  const discount = originalPrice
+    ? Math.round(
+      ((parsePrice(originalPrice) - parsePrice(price)) /
+        parsePrice(originalPrice)) * 100
+    )
+    : 0;
 
   const product = getProductBySlug(slug);
 
@@ -27,12 +36,12 @@ export default function ProductCard(props: Product) {
   }, [isSubmitted]);
 
   const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault(); 
-    e.stopPropagation(); 
+    e.preventDefault();
+    e.stopPropagation();
 
     if (product) {
       addToCart(product, quantity);
-      setIsSubmitted(true); 
+      setIsSubmitted(true);
     }
   };
 
@@ -79,7 +88,7 @@ export default function ProductCard(props: Product) {
           </div>
 
           {/* Content */}
-          <div className="p-4 flex flex-col flex-1">    
+          <div className="p-4 flex flex-col flex-1">
             <div className="text-[10px] text-orange-500 font-bold uppercase mb-1">
               {categoryName}
             </div>
@@ -91,11 +100,12 @@ export default function ProductCard(props: Product) {
             <div className="mt-auto">
               <div className="flex items-center gap-2 mb-3">
                 <span className="text-base font-bold text-red-600">
-                  {price.toLocaleString()}đ
+                  {parsePrice(price).toLocaleString("vi-VN")}đ
                 </span>
+
                 {originalPrice && (
                   <span className="text-xs text-gray-400 line-through">
-                    {originalPrice.toLocaleString()}đ
+                    {parsePrice(originalPrice).toLocaleString("vi-VN")}đ
                   </span>
                 )}
               </div>
@@ -124,7 +134,7 @@ export default function ProductCard(props: Product) {
               className="absolute inset-0 bg-slate-900/40 backdrop-blur-[2px] pointer-events-auto"
               onClick={() => setIsSubmitted(false)}
             />
-            
+
             <motion.div
               initial={{ scale: 0.8, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -136,10 +146,10 @@ export default function ProductCard(props: Product) {
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-2">Đã thêm vào giỏ!</h3>
               <p className="text-sm text-slate-500 mb-6">Sản phẩm <b>{name}</b> đã sẵn sàng trong giỏ hàng của bạn.</p>
-              
+
               <div className="flex flex-col gap-2">
-                <button 
-                  onClick={() => setIsSubmitted(false)} 
+                <button
+                  onClick={() => setIsSubmitted(false)}
                   className="w-full py-3 bg-slate-100 text-slate-600 font-bold rounded-xl hover:bg-slate-200 transition-all text-sm"
                 >
                   TIẾP TỤC MUA SẮM
