@@ -122,7 +122,7 @@ const ContactPage = () => {
                             <label className="text-[11px] font-black text-[#1b4332] uppercase tracking-widest mb-3 block">Nội dung yêu cầu</label>
                             <textarea
                                 required
-                                rows="2"
+                                rows={2}
                                 placeholder="Lời nhắn của quý khách..."
                                 className="w-full py-4 bg-transparent border-b-2 border-gray-200 outline-none focus:border-[#ff9a9e] transition-all duration-500 placeholder:text-gray-300 text-gray-800 font-bold text-lg resize-none"
                             ></textarea>
