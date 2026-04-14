@@ -18,7 +18,7 @@ export default function OrderSP() {
     // Tính tổng tiền tự động dựa trên giỏ hàng
     const totalPrice = useMemo(() => {
         return cart.reduce((total, item) => {
-            return total + (parsePrice(item.price) * item.quantity);
+            return total + (parsePrice(String(item.price)) * item.quantity);
         }, 0);
     }, [cart]);
 
