@@ -6,7 +6,7 @@ const ContactPage = () => {
 
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         setIsSubmitted(true);
     };
@@ -146,7 +146,7 @@ const ContactPage = () => {
                 </div>
             </div>
 
-         
+
             <AnimatePresence>
                 {isSubmitted && (
                     <div key="success-container" className="fixed inset-0 z-[200] flex items-center justify-center p-4">
